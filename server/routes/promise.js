@@ -1,5 +1,5 @@
 import express from "express";
-import Promise from "../models/Promise.js";
+
 import {
   createPromise,
   deletePromise,

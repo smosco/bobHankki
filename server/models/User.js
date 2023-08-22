@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema(
   {
     location: {
-      lat: { type: Number },
-      lng: { type: Number },
+      type: [Number],
       required: true,
     },
     address: {
@@ -29,6 +28,7 @@ const UserSchema = new mongoose.Schema(
     id: {
       type: String,
       required: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -42,7 +42,6 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      unique: true,
     },
     isAdmin: {
       type: Boolean,
