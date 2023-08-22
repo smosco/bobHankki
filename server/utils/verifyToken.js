@@ -14,7 +14,7 @@ export const verifyToken = (req, res, next) => {
   jwt.verify(token, process.env.JWT, (err, user) => {
     if (err) return next(createError(403, "Token is not valid"));
     //user는 로그인할때 암호화한 정보를 담은 토큰을 해독한 것으로
-    //{uuid : , isAdmin : }이다.
+    //{userId : , isAdmin : }이다.
     req.user = user;
     next();
   });
@@ -22,7 +22,7 @@ export const verifyToken = (req, res, next) => {
 
 //user 삭제할때 클라이언트에서 넘어온 id와 토큰에 저장된 uuid가 같은지 확인
 export const verifyUser = (req, res, next) => {
-  verifyToken(req, res, next, () => {
+  verifyToken(req, res, () => {
     if (req.user.userId === req.params.userId || req.user.isAdmin) {
       next();
     } else {
@@ -33,7 +33,7 @@ export const verifyUser = (req, res, next) => {
 
 //관리자인지 채크
 export const verifyAdmin = (req, res, next) => {
-  verifyToken(req, res, next, () => {
+  verifyToken(req, res, () => {
     if (req.user.isAdmin) {
       next();
     } else {
