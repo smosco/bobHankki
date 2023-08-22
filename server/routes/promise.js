@@ -7,17 +7,18 @@ import {
   updatePromise,
   getPromises,
 } from "../controllers/promise.js";
+import { verifyUser } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 //CREATE
-router.post("/", createPromise);
+router.post("/:userId", verifyUser, createPromise);
 //UPDATE
-router.put("/:id", updatePromise);
+router.put("/:promiseId/:userId", verifyUser, updatePromise);
 //DELETE
-router.delete("/:id", deletePromise);
+router.delete("/:promiseId/:userId", verifyUser, deletePromise);
 //GET
-router.get("/:id", getPromise);
+router.get("/:promiseId", getPromise);
 //GET ALL
 router.get("/", getPromises);
 //GET BY DISTANCE

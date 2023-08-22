@@ -40,7 +40,7 @@ export const login = async (req, res, next) => {
 
     //비번이 맞다면 토큰 생성
     const token = jwt.sign(
-      { uuid: user._id, isAdmin: user.isAdmin },
+      { userId: user._id, isAdmin: user.isAdmin },
       process.env.JWT
     );
 
